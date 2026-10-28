@@ -1,56 +1,57 @@
 {
   "repository": "https://github.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk",
+  "verified_source_commit": "f4af7a8ea1124cec0cc74651e976aeaf601de447",
   "report": "https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/",
   "anonymous_http_checks": [
     {
       "url": "https://github.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk",
       "http_status": 200,
-      "bytes": 339568
+      "bytes": 345029
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/README.md",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/README.md",
       "http_status": 200,
-      "bytes": 13154
+      "bytes": 13338
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/notebooks/Customer_Segmentation_and_Churn_Risk.ipynb",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/notebooks/Customer_Segmentation_and_Churn_Risk.ipynb",
       "http_status": 200,
       "bytes": 581986
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/outputs/customer_segments.csv",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/outputs/customer_segments.csv",
       "http_status": 200,
       "bytes": 4511
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/outputs/segment_summary.csv",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/outputs/segment_summary.csv",
       "http_status": 200,
       "bytes": 1150
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/outputs/customer_risk_scores.csv",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/outputs/customer_risk_scores.csv",
       "http_status": 200,
       "bytes": 4511
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/reports/Customer_Retention_Recommendation_Memo.md",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/reports/Customer_Retention_Recommendation_Memo.md",
       "http_status": 200,
       "bytes": 8459
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/reports/Customer_Retention_Recommendation_Memo.pdf",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/reports/Customer_Retention_Recommendation_Memo.pdf",
       "http_status": 200,
       "bytes": 9483
     },
     {
-      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/reports/figures/report_preview.png",
+      "url": "https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/f4af7a8ea1124cec0cc74651e976aeaf601de447/reports/figures/report_preview.png",
       "http_status": 200,
-      "bytes": 92496
+      "bytes": 92522
     },
     {
       "url": "https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/",
       "http_status": 200,
-      "bytes": 10951
+      "bytes": 10953
     },
     {
       "url": "https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/style.css",

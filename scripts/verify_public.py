@@ -4,12 +4,14 @@ from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 import os
+import subprocess
 import requests
 from playwright.sync_api import sync_playwright
 
 ROOT=Path(__file__).resolve().parents[1]
 REPO='https://github.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk'
 LIVE='https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/'
+REVISION=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
 FILES=['README.md','notebooks/Customer_Segmentation_and_Churn_Risk.ipynb','outputs/customer_segments.csv',
        'outputs/segment_summary.csv','outputs/customer_risk_scores.csv','reports/Customer_Retention_Recommendation_Memo.md',
        'reports/Customer_Retention_Recommendation_Memo.pdf','reports/figures/report_preview.png']
@@ -19,13 +21,14 @@ def canonical(content,path):
     return content if Path(path).suffix in {'.pdf','.png'} else content.replace(b'\r\n',b'\n')
 
 def check(path):
-    url=REPO if path=='' else f'https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/main/{path}'
+    # Immutable commit URLs avoid stale CDN responses for a recently updated main ref.
+    url=REPO if path=='' else f'https://raw.githubusercontent.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk/{REVISION}/{path}'
     response=requests.get(url,timeout=30);response.raise_for_status()
     if path:
         assert hashlib.sha256(canonical(response.content,path)).digest()==hashlib.sha256(canonical((ROOT/path).read_bytes(),path)).digest(),path
     return {'url':url,'http_status':response.status_code,'bytes':len(response.content)}
 
-def main():
+def main(write_report=True):
     with ThreadPoolExecutor(max_workers=4) as pool:results=list(pool.map(check,['',*FILES]))
     for asset in ['', 'style.css','app.js','data.json','icon.svg']:
         response=requests.get(LIVE+asset,timeout=30);response.raise_for_status()
@@ -58,6 +61,8 @@ def main():
         page.evaluate('window.scrollTo(0,0)');page.screenshot(path=str(ROOT/'tmp/live-report-desktop.png'),full_page=True)
         page.set_viewport_size({'width':360,'height':800})
         assert page.evaluate('document.documentElement.scrollWidth<=window.innerWidth')
+        assert 'patterns to' in page.locator('h1').inner_text()
+        assert 'accounts. One' in page.locator('.study-note strong').inner_text()
         page.screenshot(path=str(ROOT/'tmp/live-report-mobile.png'))
         links=[a.get_attribute('href') for a in page.locator('[data-file]').all()]
         for url in links:
@@ -72,12 +77,16 @@ def main():
         response=page.goto(REPO+'/blob/main/notebooks/Customer_Segmentation_and_Churn_Risk.ipynb')
         assert response.status==200
         browser.close()
-    output={'repository':REPO,'report':LIVE,'anonymous_http_checks':results,
+    output={'repository':REPO,'verified_source_commit':REVISION,'report':LIVE,'anonymous_http_checks':results,
             'live_browser_checks':{'baseline_metrics':True,'five_filters':True,'reset':True,'empty_state':True,
                                    'mobile_360px':True,'navigation':True,'no_console_errors':True,
                                    'readme_rendered':True,'notebook_page_accessible':True,'seven_deliverable_links_http_200':True}}
-    (ROOT/'reports/public_verification.json').write_text(json.dumps(output,indent=2)+'\n',encoding='utf-8')
+    if write_report:
+        (ROOT/'reports/public_verification.json').write_text(json.dumps(output,indent=2)+'\n',encoding='utf-8')
     print(f'Public verification passed: {len(results)} unauthenticated HTTP checks, seven deliverable links, live filters/reset/empty state/mobile/navigation and GitHub README.')
     print(LIVE)
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--check-only',action='store_true')
+    main(write_report=not parser.parse_args().check_only)
