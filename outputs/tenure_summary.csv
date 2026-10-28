@@ -1,0 +1,5 @@
+TenureBand,Definition,Customers,CustomerPct,LabeledCustomers,ChurnedCustomers,ObservedChurnPct,AvgTenureMonths,AvgMonthlyChargesINR,MonthlyChargeSumINR,RetainedMonthlyChargeSumINR,HighRiskChargeSumINR,ScoredCustomers,AvgRiskScore,MinRiskScore,MedianRiskScore,MaxRiskScore,HighRiskCustomers,AvgSupportTickets90Days,SmallSample
+Developing (6-12),Analytical cohort; not a primary segment,3,20.00000000,3,3,100.00000000,8.66666667,59.99000000,179.97000000,0.00000000,179.97000000,3,73.33333333,70,70.00000000,80,3,4.00000000,True
+New (0-5),Analytical cohort; not a primary segment,3,20.00000000,3,3,100.00000000,3.00000000,49.99000000,149.97000000,0.00000000,149.97000000,3,80.00000000,80,80.00000000,80,3,5.00000000,True
+Established (13-24),Analytical cohort; not a primary segment,5,33.33333333,5,1,20.00000000,18.60000000,67.99000000,339.95000000,259.96000000,79.99000000,5,41.00000000,30,40.00000000,65,1,1.80000000,False
+Long-term (25+),Analytical cohort; not a primary segment,4,26.66666667,4,0,0.00000000,38.50000000,149.99000000,599.96000000,599.96000000,0.00000000,4,20.00000000,20,20.00000000,20,0,0.50000000,True

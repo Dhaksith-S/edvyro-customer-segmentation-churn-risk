@@ -1,0 +1,62 @@
+# Data dictionary
+
+Null numeric CSV cells mean unknown, not zero. Percent fields use 0-100 units. Means exclude nulls. Summary labels are mutually exclusive within a single dimension; different dimensions overlap and must not be added together.
+
+| Field | Definition |
+| --- | --- |
+| AnalysisID | SHA-256-derived synthetic ID (12 hex chars); no raw customer ID. |
+| TenureMonths | Completed months; finite nonnegative integer, null if invalid. |
+| SubscriptionType | Actual Basic, Pro, Enterprise label; descriptive, not a score input. |
+| ContractType | Actual Month-to-Month, One Year, Two Year; score and segment input. |
+| PaymentMethod | Credit Card, Bank Transfer, UPI, Debit Card; descriptive only. |
+| MonthlyCharges | Fictional monthly amount in INR; null if invalid; not current MRR. |
+| SupportTickets | Nonnegative integer count in prior 90 days; timing versus churn unknown; descriptive only. |
+| PrimarySegment | Exactly one contract/lifecycle segment; Data review if tenure/contract invalid. |
+| TenureBand | New 0-5; Developing 6-12; Established 13-24; Long-term 25+ months; Unknown. |
+| SpendingBand | Low <70; Medium 70-<100; High >=100 INR; Unknown. |
+| ScoreEligible | Boolean: all three core risk inputs valid. |
+| EvaluationEligible | Boolean: core inputs valid and churn label known. |
+| RiskScore | Nullable integer assumption-based index 0-100; not a probability. |
+| RiskBand | Low 0-29; Medium 30-59; High 60-100; Unscored. |
+| TenurePoints | Nullable integer 0,10,25,35; tenure contribution. |
+| ContractPoints | Nullable integer 0,20,45; contract contribution. |
+| ChargePoints | Nullable integer 0,10,20; monthly-charge contribution. |
+| ScoreExplanation | Plain-text conditions and awarded points, including zero; missing-input reason. |
+| Churned | Nullable outcome: Yes->1, No->0. Retrospective evaluation only. |
+| Definition | Primary segment rule, or note identifying overlapping analytical cohort. |
+| Customers | Number of retained source records in cohort. |
+| CustomerPct | 100 * cohort customers / all retained customers, in percent. |
+| LabeledCustomers | Cohort rows with known Churned; denominator for observed churn. |
+| ChurnedCustomers | Sum of known Churned labels in cohort. |
+| ObservedChurnPct | 100 * churned / labelled; null if no labels. |
+| AvgTenureMonths | Mean known tenure, in months. |
+| AvgMonthlyChargesINR | Mean known recorded monthly charges, in INR. |
+| MonthlyChargeSumINR | Sum of known recorded charges, in INR; includes churned; null if all missing. |
+| RetainedMonthlyChargeSumINR | Known monthly charges for Churned=0, INR; not verified active MRR. |
+| HighRiskChargeSumINR | Known monthly charges for High band, INR; not expected loss or savable revenue. |
+| ScoredCustomers | Number of cohort rows with a non-null score. |
+| AvgRiskScore | Mean non-null risk index, points. |
+| MinRiskScore | Minimum non-null risk index, points. |
+| MedianRiskScore | Median non-null risk index, points. |
+| MaxRiskScore | Maximum non-null risk index, points. |
+| HighRiskCustomers | Count of High band accounts. |
+| AvgSupportTickets90Days | Mean known support ticket count; previous 90 days. |
+| SmallSample | Boolean: cohort has fewer than five records; heuristic caution flag. |
+| source_row | 1-based original CSV line number including header. |
+| field | Source column with cleaning event; record for exact duplicate. |
+| action | Documented normalization, missing/invalid, or exclusion decision. |
+| signal | Scoring signal name. |
+| feature | Source field used for signal. |
+| condition | Exact point-awarding thresholds. |
+| maximum | Maximum points contributed by signal. |
+| reason | Business-assumption rationale, not fitted evidence. |
+| eligibility | Conditions needed to calculate the score. |
+| missing_treatment | Null score and Unscored band; no silent imputation. |
+| CustomerID | Original synthetic unique ID, local only. |
+| Gender | Source category, excluded from prioritization and public customer exports. |
+| Age | Source age in years, excluded from prioritization and public customer exports. |
+| TotalCharges | Source cumulative INR amount; mechanically tenure times monthly charges in supplied sample; local only. |
+| Churn | Original Yes/No outcome; mapped to Churned. |
+| ChargeDifference | Local-only TotalCharges minus tenure*monthly charge, rounded to INR 0.01. |
+
+`outputs/data_profile.json` records original row/column counts, inferred dtypes, missing counts, raw category frequencies, numeric minima/maxima, duplicate counts, source SHA-256, retained/scored/evaluated row counts, and billing-identity discrepancy count. `key_findings.json` contains same-named aggregate counts, charge sums in INR, tenure mean in months, and index bounds derived from exported rows. `docs/data.json` mirrors the customer export schema. `customer_segments.csv` and `customer_risk_scores.csv` intentionally share a complete reproducible input/output schema.

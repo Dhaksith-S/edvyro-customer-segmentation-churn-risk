@@ -1,0 +1,16 @@
+{
+  "tests": 104,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": 104,
+  "test_groups": {
+    "tests.test_notebook": 1,
+    "tests.test_preprocessing": 25,
+    "tests.test_scoring": 46,
+    "tests.test_segmentation_exports": 22,
+    "tests.test_site": 10
+  },
+  "notebook_code_cells_executed": 14,
+  "memo_pages_visually_verified": 3
+}

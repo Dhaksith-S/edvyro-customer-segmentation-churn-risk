@@ -1,0 +1,13 @@
+{
+  "customers": 15,
+  "churned": 7,
+  "churn_pct": 46.666666666666664,
+  "monthly_charge_sum_inr": 1269.85,
+  "high_risk_customers": 7,
+  "high_risk_charge_sum_inr": 409.93,
+  "retained_high_risk_customers": 0,
+  "retained_monthly_charge_sum_inr": 859.92,
+  "mean_tenure_months": 18.8,
+  "score_min": 20,
+  "score_max": 80
+}

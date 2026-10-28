@@ -1,0 +1,4 @@
+signal,feature,condition,maximum,reason,eligibility,missing_treatment
+Tenure,TenureMonths,0 <= months < 6: 35; 6 <= months <= 12: 25; 12 < months <= 24: 10; >24: 0,35,Early lifecycle needs onboarding; fixed planning assumption,All three core inputs valid; otherwise no score,Null score; Unscored; data review
+Commitment,ContractType,Month-to-Month: 45; One Year: 20; Two Year: 0,45,Shorter commitment permits an easier exit; association not causation,All three core inputs valid; otherwise no score,Null score; Unscored; data review
+Charge exposure,MonthlyCharges,INR >=100: 20; 70 <= INR <100: 10; 0 <= INR <70: 0,20,Absolute bill exposure may warrant a value review; affordability is unknown,All three core inputs valid; otherwise no score,Null score; Unscored; data review

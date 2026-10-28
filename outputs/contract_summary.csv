@@ -1,0 +1,4 @@
+ContractType,Definition,Customers,CustomerPct,LabeledCustomers,ChurnedCustomers,ObservedChurnPct,AvgTenureMonths,AvgMonthlyChargesINR,MonthlyChargeSumINR,RetainedMonthlyChargeSumINR,HighRiskChargeSumINR,ScoredCustomers,AvgRiskScore,MinRiskScore,MedianRiskScore,MaxRiskScore,HighRiskCustomers,AvgSupportTickets90Days,SmallSample
+Month-to-Month,Analytical cohort; not a primary segment,7,46.66666667,7,7,100.00000000,7.00000000,58.56142857,409.93000000,0.00000000,409.93000000,7,75.00000000,65,80.00000000,80,7,4.28571429,False
+One Year,Analytical cohort; not a primary segment,4,26.66666667,4,0,0.00000000,19.75000000,64.99000000,259.96000000,259.96000000,0.00000000,4,35.00000000,30,35.00000000,40,0,1.50000000,True
+Two Year,Analytical cohort; not a primary segment,4,26.66666667,4,0,0.00000000,38.50000000,149.99000000,599.96000000,599.96000000,0.00000000,4,20.00000000,20,20.00000000,20,0,0.50000000,True
