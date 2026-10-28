@@ -24,6 +24,12 @@ Real headless Chromium tests run against a temporary local HTTP server. All six 
 
 The 360px viewport has no page-level horizontal overflow; the wide customer table scrolls within its own labelled region. Filter interaction works at mobile width. Desktop and mobile screenshots were inspected; the public preview is `reports/figures/report_preview.png`. These checks establish functionality and basic responsiveness; they are not a formal screen-reader certification or exhaustive cross-browser audit. No hosted CI run is claimed; automated scripts and local results are included, and GitHub Pages requires no custom build workflow.
 
+## Public release verification
+
+Public repository: <https://github.com/Dhaksith-S/edvyro-customer-segmentation-churn-risk>. Visibility is PUBLIC, the default branch is `main`, and the project uses an isolated local Git repository and the authenticated account's verified GitHub noreply identity.
+
+Live report: <https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/>. GitHub Pages serves `main:/docs`; HTTPS is enforced. The built-in Pages deployment completed successfully. `scripts/verify_public.py` performs 14 unauthenticated HTTP checks, verifies seven supporting-material links, compares text content after Git line-ending normalization, and checks binary PDF/PNG bytes exactly. It also confirms live baseline metrics, all five filters, reset, empty state, navigation, 360px width, no unexpected app console errors, GitHub README rendering, and notebook-page accessibility. Machine-readable evidence is in `reports/public_verification.json`. No sign-in is required.
+
 ## PDF checks
 
 The memo is three A4 pages generated with ReportLab. Every page was rasterized with PyMuPDF and visually inspected after final changes. Human-readable table headings, units, consistent colors, repeated headers, margins and page footers are present. Measurement planning starts on page 3. No clipped text, broken glyphs, overlapping cells or orphaned section headings were observed. PyMuPDF is the available renderer; Poppler is not installed on this workstation.

@@ -9,7 +9,7 @@ An auditable Python analysis and interactive report by [Dhaksith-S](https://gith
 | Customer segment table | [Customer-level CSV](outputs/customer_segments.csv) · [Segment summary](outputs/segment_summary.csv) |
 | Recommendation memo | [Business memo](reports/Customer_Retention_Recommendation_Memo.md) · [Typeset PDF](reports/Customer_Retention_Recommendation_Memo.pdf) |
 
-**[Explore the interactive report](https://Dhaksith-S.github.io/edvyro-customer-segmentation-churn-risk/)** · [Scoring specification](reports/Scoring_Methodology.md) · [Data quality report](reports/Data_Quality_Report.md) · [Data dictionary](reports/Data_Dictionary.md)
+**[Explore the interactive report](https://dhaksith-s.github.io/edvyro-customer-segmentation-churn-risk/)** · [Scoring specification](reports/Scoring_Methodology.md) · [Data quality report](reports/Data_Quality_Report.md) · [Data dictionary](reports/Data_Dictionary.md) · [Validation](reports/Validation_Report.md) · [Final audit](reports/Final_Requirement_Audit.md)
 
 ## Executive overview
 
@@ -103,7 +103,7 @@ For a larger **active**, dated cohort, preregister the index and compare randomi
 
 ## Reproduce locally
 
-Python 3.11 is the tested interpreter. From this repository root, in PowerShell:
+Python 3.11 is the tested interpreter; [requirements-lock.txt](requirements-lock.txt) records the exact tested environment. From this repository root, in PowerShell:
 
 ```powershell
 python -m venv .venv

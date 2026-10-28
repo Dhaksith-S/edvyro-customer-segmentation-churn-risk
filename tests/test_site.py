@@ -46,16 +46,28 @@ def page(browser,site_url):
 
 def assert_population(page,rows):
     n=len(rows);assert page.locator('#count').inner_text()==str(n)
+    assert page.locator('#share').inner_text()==f'{100*n/len(DATA):.1f}% of full sample'
     labeled=[r for r in rows if r['Churned'] is not None]
     churn=sum(r['Churned'] for r in labeled)
     expected=f'{100*churn/len(labeled):.1f}%' if labeled else '—'
     assert page.locator('#churn').inner_text()==expected
     expected_charge=f"{sum(r['MonthlyCharges'] for r in rows):,.2f}" if n else '—'
     assert page.locator('#charges').inner_text()==expected_charge
+    scored=[r for r in rows if r['RiskScore'] is not None]
+    expected_score=f"{sum(r['RiskScore'] for r in scored)/len(scored):.1f}" if scored else '—'
+    assert page.locator('#score').inner_text()==expected_score
     assert page.locator('#active').inner_text()==str(sum(r['RiskBand']=='High' and r['Churned']==0 for r in rows))
     visible=page.locator('#customers [data-id]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.id)')
     assert set(visible)=={r['AnalysisID'] for r in rows}
     assert len(visible)==n
+    risk_text=page.locator('#risk-chart .bar-head span:last-child').all_inner_texts()
+    charge_text=page.locator('#revenue-chart .bar-head span:last-child').all_inner_texts()
+    for i,band in enumerate(['Low','Medium','High']):
+        g=[r for r in rows if r['RiskBand']==band]
+        l=[r for r in g if r['Churned'] is not None]
+        c=sum(r['Churned'] for r in l)
+        assert (f'{c}/{len(l)}' if l else '0 labelled') in risk_text[i]
+        assert charge_text[i]==f"INR {sum(r['MonthlyCharges'] for r in g):,.2f} · n={len(g)}"
     if n:
         segment_counts=page.locator('#segment-chart .bar-head span:last-child').all_inner_texts()
         assert sum(int(t.split()[0]) for t in segment_counts)==n
@@ -95,6 +107,8 @@ def test_mobile_layout_and_visual_evidence(page):
     page.screenshot(path=str(ROOT/'tmp/report-preview.png'))
     page.set_viewport_size({'width':360,'height':800})
     assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
+    assert 'patterns to' in page.locator('h1').inner_text()
+    assert 'accounts. One' in page.locator('.study-note strong').inner_text()
     assert page.locator('#reset').is_visible()
     page.screenshot(path=str(ROOT/'tmp/report-mobile.png'),full_page=True)
     # Filter interactions remain usable at the required narrow width.
